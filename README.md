@@ -45,6 +45,17 @@ Smart Fridge System bertujuan untuk:
 
 ---
 
+## 🛗 Provide dan Require Interface
+
+
+
+---
+
+## 📃 UML Class Diagram
+
+
+---
+
 ## 💻 Cara Menjalankan di Lokal
 
 Ikuti langkah-langkah berikut untuk menjalankan program ini di komputer kamu:
