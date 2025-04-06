@@ -47,12 +47,13 @@ Smart Fridge System bertujuan untuk:
 
 ## 🛗 Provide dan Require Interface
 
-
+![Provide and Required Interfaces](images/provide-required.png)
 
 ---
 
 ## 📃 UML Class Diagram
 
+![UML](images/uml.png)
 
 ---
 
