@@ -1,0 +1,109 @@
+/*
+  Konteks: FridgeUnit::addItem(name)
+
+  Deskripsi:
+  - Fungsi ini bertanggung jawab untuk menambahkan bahan ke dalam storage kulkas.
+
+  Precondition:
+  - Parameter 'name' tidak boleh null.
+
+  Postcondition:
+  - Setelah pemanggilan, ukuran storage bertambah 1.
+  - Nama bahan yang ditambahkan akan ada di dalam storage.
+*/
+context FridgeUnit::addItem(name : String)
+pre NameNotNull: name <> null
+post ItemAdded: self.containsItem(name)
+
+/*
+  Konteks: FridgeUnit::removeItem(name)
+
+  Deskripsi:
+  - Fungsi ini bertanggung jawab untuk menghapus bahan berdasarkan nama (case-insensitive).
+  - Jika bahan ditemukan, maka bahan akan dihapus dari list storage.
+  - Jika tidak ditemukan, maka list tidak berubah.
+
+  Precondition:
+  - Parameter 'name' tidak boleh null.
+
+  Postcondition:
+  - Jika bahan ditemukan, ukuran storage berkurang 1 dan item tersebut tidak lagi ada di storage.
+  - Jika tidak ditemukan, tidak ada perubahan pada storage.
+*/
+context FridgeUnit::removeItem(name : String)
+pre NameNotNull: name <> null
+post ItemRemovedOrNotChanged:
+  if self.oclIsNew() then
+    true
+  else
+    if self.containsItem(name) then
+      self.storage->size() < self.storage@pre->size()
+    else
+      self.storage->size() = self.storage@pre->size()
+    endif
+  endif
+
+/*
+  Konteks: FridgeUnit::containsItem(name)
+
+  Deskripsi:
+  - Mengecek apakah bahan tertentu ada dalam storage kulkas (case-insensitive).
+
+  Precondition:
+  - Parameter 'name' tidak boleh null.
+
+  Postcondition:
+  - Mengembalikan true jika item ada, false jika tidak.
+*/
+context FridgeUnit::containsItem(name : String) : Boolean
+pre NameNotNull: name <> null
+
+/*
+  Konteks: FridgeUnit::showAllItems()
+
+  Deskripsi:
+  - Menampilkan seluruh bahan yang ada dalam kulkas.
+  - Tidak mengubah state objek (pure function).
+
+  Precondition:
+  - Tidak ada pre-kondisi khusus.
+
+  Postcondition:
+  - Tidak ada perubahan pada isi storage.
+*/
+context FridgeUnit::showAllItems()
+post StorageUnchanged: self.storage = self.storage@pre
+
+/*
+  Konteks: DataCenter::syncItems()
+
+  Deskripsi:
+  - Menyinkronkan bahan dari FridgeUnit melalui viewer.
+  - Hanya membaca data, tidak mengubah state.
+
+  Precondition:
+  - viewer tidak boleh null.
+
+  Postcondition:
+  - Tidak ada perubahan pada data kulkas (FridgeUnit).
+*/
+context DataCenter::syncItems()
+pre ViewerNotNull: self.viewer <> null
+post NoChange: self.viewer.oclIsUndefined() or self.viewer = self.viewer@pre
+
+/*
+  Konteks: DisplayPanel::displayContent()
+
+  Deskripsi:
+  - Menampilkan isi kulkas ke layar tambahan.
+  - Tidak mengubah state dari komponen manapun.
+
+  Precondition:
+  - viewer tidak boleh null.
+
+  Postcondition:
+  - Tidak ada perubahan data.
+*/
+context DisplayPanel::displayContent()
+pre ViewerNotNull: self.viewer <> null
+post NoChange: self.viewer.oclIsUndefined() or self.viewer = self.viewer@pre
