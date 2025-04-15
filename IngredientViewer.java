@@ -1,5 +1,5 @@
 // Interface: IngredientViewer (untuk melihat & mengecek bahan)
 public interface IngredientViewer {
-    boolean containsItem(String name);
+    boolean containsItem(String item);
     void showAllItems();
 }

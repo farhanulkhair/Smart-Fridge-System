@@ -1,0 +1,13 @@
+/* 
+ * Preconditions:
+ * - tidak ada khusus
+
+ * Postconditions:
+ * - semua item yang ada di dalam storage ditampilkan
+ */
+
+
+context FridgeUnit::showAllItems()
+pre noPrecondition
+
+post NoChange: storage = storage

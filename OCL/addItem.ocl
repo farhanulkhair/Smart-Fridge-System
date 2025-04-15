@@ -1,0 +1,17 @@
+/*
+ * addItem(item : String) : void
+ * Preconditions:
+ * - item harus bukan null
+ * - item harus bukan empty string atau string kosong   
+
+ * Postconditions:
+ * - item item masuk ke dalam storage
+ * - ukuran storage bertambah 1
+ */
+
+context FridgeUnit::addItem(item : String)
+
+pre itemNotNull: item <> null
+pre itemNotEmpty: item.trim().size() > 0
+post ItemAdded: storage->includes(item)
+post SizeIncreased: storage->size() = storage@pre->size() + 1

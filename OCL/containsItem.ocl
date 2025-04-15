@@ -1,0 +1,14 @@
+/*
+ * Preconditions:
+ * - item tidak boleh null
+
+ * Postconditions:
+ * - Akan bernilai True jika ada item di dalam storage yang memiliki nama yang sama dengan item
+ */
+
+
+context FridgeUnit::containsItem(name : String): Boolean
+pre NameNotNull: name <> null
+
+post ResultIsCorrect: 
+  result = storage->exists(s | s.toLowerCase() = name.toLowerCase())

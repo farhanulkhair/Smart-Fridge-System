@@ -1,0 +1,12 @@
+/*
+ * Preconditions:
+ * - viewer harus bukan null
+ * 
+ * Postconditions:
+ * - semua item yang ada di dalam storage ditampilkan
+ */
+
+context DataCenter::syncItems()
+pre ViewerNotNull: viewer <> null
+
+post NoStateChange: true -- karena hanya view, tidak mengubah state internal
